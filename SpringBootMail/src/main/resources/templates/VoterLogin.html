@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            background-color: #f4f4f4; /* Light gray background */
+            color: #fff;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #333;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding-top: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            color: white;
+            padding: 15px;
+            text-decoration: none;
+            margin: 15px 0;
+        }
+
+        .sidebar a:hover {
+            background-color: #575757;
+        }
+
+        .sidebar a .icon {
+            margin-right: 10px;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 30px;
+            color: white;
+            padding: 15px;
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-250px);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+
+        .main-content {
+            margin-left: 250px;
+            width: calc(100% - 250px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #333; /* Black background for form */
+            padding: 3em;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 500px; /* Increased width */
+            max-width: 100%;
+            color: #fff;
+        }
+
+        .container h1 {
+            text-align: center;
+            margin-bottom: 1.5em;
+        }
+
+        .container label {
+            display: block;
+            margin-top: 1em;
+            color: #fff;
+        }
+
+        .container input[type="text"], .container input[type="email"], .container input[type="password"], .container input[type="date"], .container select {
+            width: 100%;
+            padding: 0.75em;
+            margin-top: 0.5em;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9; /* Light gray background for input fields */
+            color: #000; /* Black text for input fields */
+        }
+
+        .container input::placeholder, .container select::placeholder {
+            color: #aaa;
+        }
+
+        .container .button-container {
+            display: flex;
+            justify-content: center; /* Center the button container */
+        }
+
+        .container button, .container .btn {
+            width: 100%; /* Make the button full width */
+            padding: 0.9em;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 1.1em;
+            border-radius: 5px;
+            cursor: pointer;
+            max-width: 200px; /* Set max width for button */
+            margin-top: 20px;
+        }
+
+        .container button:hover, .container .btn:hover {
+            background-color: #45a049;
+        }
+
+        .form-group .error {
+            color: red;
+            font-size: 12px;
+        }
+
+        .btn {
+            display: block;
+            text-align: center;
+            color: #fff;
+            background-color: #4CAF50;
+            text-decoration: none;
+            border-radius: 5px;
+            padding: 0.9em;
+            margin-top: 1.5em;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        form a.btn {
+            background-color: #f44336;
+        }
+
+        form a.btn:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="hamburger" onclick="toggleSidebar()">☰</div>
+    <div class="sidebar" id="sidebar">
+        <a href="/Home">
+            <span class="icon">🏠</span>
+            Home
+        </a>
+        <a href="/loginApi">
+            <span class="icon">👤</span>
+            Admin Login
+        </a>
+        <a href="/voter">
+            <span class="icon">📝</span>
+            Voter Signup
+        </a>
+        <a href="/Vlogin">
+            <span class="icon">🔑</span>
+            Voter Login
+        </a>
+    </div>
+
+    <div class="main-content">
+        <div class="container">
+            <h1>Login</h1>
+            <form action="/voterlogin" method="post">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                
+                <div class="button-container">
+                    <button type="submit" class="btn">Login</button>
+                </div>
+            </form>
+            <a href="/voterList" class="btn">Back to List</a>
+        </div>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            var sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Voter</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #e9ecef;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #555;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .btn {
+            display: inline-block;
+            width: calc(50% - 10px);
+            padding: 12px;
+            margin-top: 20px;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Voter</h1>
+        <form action="/updateVoter" th:object="${voter}" method="post">
+            <input type="hidden" th:field="*{id}">
+            
+            <label for="voterName">Name:</label>
+            <input type="text" id="voterName" th:field="*{voterName}" required minlength="4" maxlength="8" pattern="[A-Za-z]+" title="Only characters are allowed">
+            
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" th:field="*{dob}" required>
+            
+            <label for="gender">Gender:</label>
+            <select id="gender" th:field="*{gender}" required>
+                <option value="Male" th:selected="${voter.gender == 'Male'}">Male</option>
+                <option value="Female" th:selected="${voter.gender == 'Female'}">Female</option>
+                <option value="Other" th:selected="${voter.gender == 'Other'}">Other</option>
+            </select>
+            
+            <label for="username">Username:</label>
+            <input type="text" id="username" th:field="*{username}" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" th:field="*{email}" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" th:field="*{password}" required>
+            
+            <div class="btn-group">
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a href="/voterList" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

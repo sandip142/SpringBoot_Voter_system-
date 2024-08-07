@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voter Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            overflow: hidden;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn.verify {
+            background-color: #4CAF50;
+        }
+
+        .btn.delete {
+            background-color: #f44336;
+        }
+
+        .btn.verify:hover {
+            background-color: #45a049;
+        }
+
+        .btn.delete:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Username</th>
+                    <th>Gender</th>
+                    <th>Date of Birth</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="voter : ${voters}">
+                    <td th:text="${voter.id}"></td>
+                    <td th:text="${voter.voterName}"></td>
+                    <td th:text="${voter.email}"></td>
+                    <td th:text="${voter.username}"></td>
+                    <td th:text="${voter.gender}"></td>
+                    <td th:text="${voter.dob}"></td>
+                    <td>
+                        <form action="#" th:action="@{/VerifyfromAdmin}" method="post" style="display:inline;">
+                            <input type="hidden" th:value="${voter.id}" name="id">
+                            <button type="submit" class="btn verify">Verify</button>
+                        </form>
+                        <form action="#" th:action="@{/deleteVoterfromAdmin}" method="post" style="display:inline;">
+                            <input type="hidden" th:value="${voter.id}" name="id">
+                            <button type="submit" class="btn delete">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

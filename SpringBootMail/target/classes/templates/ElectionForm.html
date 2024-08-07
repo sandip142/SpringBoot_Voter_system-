@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Election</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .form-group input[type="date"] {
+            padding: 8px;
+        }
+
+        .form-group input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .form-group input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .form-group .error {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Schedule Election</h2>
+        <form th:object="${election}" action="/setElection" method="POST">
+            <div class="form-group">
+                <label for="ename">Election Name</label>
+                <input type="text" id="ename" th:field="*{ename}" required minlength="3" maxlength="50">
+                <span class="error" id="enameError"></span>
+            </div>
+            <div class="form-group">
+                <label for="state">State</label>
+                <input type="text" id="state" th:field="*{state}" required>
+                <span class="error" id="stateError"></span>
+            </div>
+            <div class="form-group">
+                <label for="eDate">Election Date</label>
+                <input type="date" id="eDate" th:field="*{eDate}" required>
+                <span class="error" id="eDateError"></span>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" th:field="*{description}" required rows="4"></textarea>
+                <span class="error" id="descriptionError"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Schedule Election">
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('electionForm').addEventListener('submit', function (event) {
+            let isValid = true;
+
+            // Election ID validation
+            const eid = document.getElementById('eid');
+            if (eid.value.trim() === '') {
+                isValid = false;
+                document.getElementById('eidError').innerText = 'Election ID is required.';
+            } else {
+                document.getElementById('eidError').innerText = '';
+            }
+
+            // Election Name validation
+            const ename = document.getElementById('ename');
+            if (ename.value.trim().length < 3 || ename.value.trim().length > 50) {
+                isValid = false;
+                document.getElementById('enameError').innerText = 'Election name should be between 3 and 50 characters.';
+            } else {
+                document.getElementById('enameError').innerText = '';
+            }
+
+            // State validation
+            const state = document.getElementById('state');
+            if (state.value.trim() === '') {
+                isValid = false;
+                document.getElementById('stateError').innerText = 'State is required.';
+            } else {
+                document.getElementById('stateError').innerText = '';
+            }
+
+            // Election Date validation
+            const eDate = document.getElementById('eDate');
+            if (eDate.value.trim() === '') {
+                isValid = false;
+                document.getElementById('eDateError').innerText = 'Election date is required.';
+            } else {
+                document.getElementById('eDateError').innerText = '';
+            }
+
+            // Description validation
+            const description = document.getElementById('description');
+            if (description.value.trim() === '') {
+                isValid = false;
+                document.getElementById('descriptionError').innerText = 'Description is required.';
+            } else {
+                document.getElementById('descriptionError').innerText = '';
+            }
+
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>

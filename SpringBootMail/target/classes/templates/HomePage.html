@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Sidebar Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #333;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding-top: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            color: white;
+            padding: 15px;
+            text-decoration: none;
+            margin: 15px 0;
+        }
+
+        .sidebar a:hover {
+            background-color: #575757;
+        }
+
+        .sidebar a .icon {
+            margin-right: 10px;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .main-content img {
+            max-width: 100%;
+            height: auto;
+            max-height: 600px;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 30px;
+            color: white;
+            padding: 15px;
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-250px);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hamburger" onclick="toggleSidebar()">☰</div>
+    <div class="sidebar" id="sidebar">
+        <a href="/Home">
+            <span class="icon">🏠</span>
+            Home
+        </a>
+          <a href="/saveAdmin">
+            <span class="icon">🔑</span>
+            Admin Signup
+        </a>
+        <a href="/loginApi">
+            <span class="icon">👤</span>
+            Admin Login
+        </a>
+        <a href="/voter">
+            <span class="icon">📝</span>
+            Voter Signup
+        </a>
+        <a href="/Vlogin">
+            <span class="icon">🔑</span>
+            Voter Login
+        </a>
+    </div>
+
+    <div class="main-content">
+        <h1>Welcome to the Voting System</h1>
+        <img src="https://eduauraapublic.s3.ap-south-1.amazonaws.com/webassets/images/blogs/how-to-vote-in-india.jpg" alt="Voting Image">
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            var sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
